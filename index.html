@@ -421,6 +421,8 @@ const o = {}; for (const k in map) o[k] = String(cell(row, map[k])).trim();
 if (map.fiyat >= 0 && row.c[map.fiyat] && typeof row.c[map.fiyat].v === "number") o.fiyat = row.c[map.fiyat].v;
 return o;
 }).filter(o => o.baslik && ["evet", "e", "1", "true", "aktif"].includes(norm(o.aktif)));
+const sid = o => Number((String(o.link).match(/(\d{6,})/) || [])[1] || Infinity);
+ALL.sort((a, b) => (sid(b) > sid(a)) - (sid(b) < sid(a)));
 } catch (e) {
 console.warn("İlanlar yüklenemedi", e);
 ALL = [];
